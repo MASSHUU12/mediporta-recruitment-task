@@ -17,3 +17,9 @@ cd mediporta-recruitment-task
 npm i
 npm start
 ```
+
+## Docs
+
+[Usage of /tags](https://api.stackexchange.com/docs/tags)
+
+[Material UI](https://mui.com/material-ui/getting-started/)
