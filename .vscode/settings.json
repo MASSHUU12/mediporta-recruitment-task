@@ -1,0 +1,8 @@
+{
+	"typescript.format.semicolons": "insert",
+	"editor.rulers": [80, 120],
+	"files.eol": "\n",
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	}
+}
