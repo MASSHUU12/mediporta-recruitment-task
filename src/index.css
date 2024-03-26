@@ -3,30 +3,30 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    font: inherit;
+	margin: 0;
+	padding: 0;
+	font: inherit;
 }
 
 html {
-    hanging-punctuation: first last;
-    color-scheme: dark light;
+	hanging-punctuation: first last;
+	color-scheme: dark light;
 }
 
 body {
-    min-height: 100svh;
+	min-height: 100svh;
 }
 
 img,
 picture,
 svg,
 video {
-    display: block;
-    max-width: 100%;
+	display: block;
+	max-width: 100%;
 }
 
 h1,
@@ -35,23 +35,23 @@ h3,
 h4,
 h5,
 h6 {
-    text-wrap: balance;
+	text-wrap: balance;
 }
 
 p {
-    max-width: 75ch;
-    text-wrap: pretty;
+	max-width: 75ch;
+	text-wrap: pretty;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    :has(:target) {
-        scroll-behavior: smooth;
-        scroll-padding-top: 3rem;
-    }
+	:has(:target) {
+		scroll-behavior: smooth;
+		scroll-padding-top: 3rem;
+	}
 }
 
 /* END RESET */
 
 * {
-    font-family: system-ui, sans-serif;
+	font-family: system-ui, sans-serif;
 }
