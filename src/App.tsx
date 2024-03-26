@@ -9,7 +9,10 @@ function App() {
 	return (
 		<div>
 			<p>The quick brown fox jumps over the lazy dog.</p>
-			<Button variant="contained" onClick={printTags}>
+			<Button
+				variant="contained"
+				onClick={printTags}
+			>
 				Sphinx of black quartz, judge my vow.
 			</Button>
 		</div>
