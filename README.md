@@ -12,7 +12,7 @@
 ## Getting started
 
 ```bash
-git clone https://github.com/MASSHUU12/mediporta-recruitment-task
+git clone https://github.com/MASSHUU12/mediporta-recruitment-task.git
 cd mediporta-recruitment-task
 npm i
 npm start
