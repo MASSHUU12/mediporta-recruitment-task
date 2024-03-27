@@ -5,28 +5,19 @@ import {
 	CardContent,
 	Collapse,
 	Divider,
+	Link,
 	Stack,
 	Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { TagInfo as Info } from "../types/TagInfo";
 
 interface TagInfoProps {
-	name: string;
-	count: number;
-	isRequired: boolean;
-	isModeratorOnly: boolean;
-	hasSynonyms: boolean;
+	info: Info;
 	expanded?: boolean;
 }
 
-function TagInfo({
-	name,
-	count,
-	isRequired,
-	isModeratorOnly,
-	hasSynonyms,
-	expanded,
-}: TagInfoProps): JSX.Element {
+function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 	const [isExpanded, setExpanded] = useState(expanded ?? false);
 
 	const handleExpandClick = () => {
@@ -60,7 +51,7 @@ function TagInfo({
 							variant="h5"
 							component="h3"
 						>
-							{name}
+							{info.name}
 						</Typography>
 						{isExpanded ? <ExpandLess /> : <ExpandMore />}
 					</Stack>
@@ -76,26 +67,44 @@ function TagInfo({
 							variant="body2"
 							color="text.secondary"
 						>
-							Count: {count}
+							Count: {info.count}
 						</Typography>
 						<Typography
 							variant="body2"
 							color="text.secondary"
 						>
-							Required: {isRequired ? "Yes" : "No"}
+							Required: {info.is_required ? "Yes" : "No"}
 						</Typography>
 						<Typography
 							variant="body2"
 							color="text.secondary"
 						>
-							Moderator Only: {isModeratorOnly ? "Yes" : "No"}
+							Moderator Only: {info.is_moderator_only ? "Yes" : "No"}
 						</Typography>
 						<Typography
 							variant="body2"
 							color="text.secondary"
 						>
-							Has synonyms: {hasSynonyms ? "Yes" : "No"}
+							Has synonyms: {info.has_synonyms ? "Yes" : "No"}
 						</Typography>
+						{info.collectives && (
+							<>
+								<Divider />
+								{info.collectives.map(collective => {
+									return (
+										<Link
+											key={collective.slug}
+											href={"https://stackoverflow.com" + collective.link}
+											target="_blank"
+											rel="noreferrer"
+											aria-label={`Visit ${collective.name} collective`}
+										>
+											Visit {collective.name} collective
+										</Link>
+									);
+								})}
+							</>
+						)}
 					</Stack>
 				</Collapse>
 			</CardContent>
