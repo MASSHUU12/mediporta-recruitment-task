@@ -3,6 +3,7 @@ import { SortOrder } from "../types/Sort";
 import SortDirection from "./SortDirection";
 import Submit from "./Submit";
 import ItemCountField from "./ItemCountField";
+import SortBy from "./SortBy";
 
 interface MenuProps {
 	submitDisabled: boolean;
@@ -15,8 +16,9 @@ function Menu(props: MenuProps): JSX.Element {
 		<Stack
 			spacing={2}
 			direction="row"
-			alignItems="center"
+			alignItems="end"
 		>
+			<SortBy />
 			<ItemCountField
 				min={0}
 				max={100}
