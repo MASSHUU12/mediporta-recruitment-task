@@ -8,29 +8,53 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
-	args: {},
+	args: {
+		info: {
+			name: "C#",
+			count: 1614806,
+			is_required: false,
+			is_moderator_only: false,
+			has_synonyms: true,
+		},
+	},
 } satisfies Meta<typeof TagInfo>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	args: {
-		name: "C#",
-		count: 1614806,
-		isRequired: false,
-		isModeratorOnly: false,
-		hasSynonyms: true,
-	},
+	args: {},
 };
 
 export const Open: Story = {
+	args: {},
+};
+
+const collective = {
+	tags: ["php"],
+	external_links: [
+		{
+			type: "support",
+			link: "https://stackoverflow.com/contact?topic=15",
+		},
+	],
+	description:
+		"A collective where developers working with PHP can learn and connect about the open source scripting language.",
+	link: "/collectives/php",
+	name: "PHP",
+	slug: "php",
+};
+
+export const WithCollectives: Story = {
 	args: {
-		name: "C#",
-		count: 1614806,
-		isRequired: false,
-		isModeratorOnly: false,
-		hasSynonyms: true,
 		expanded: true,
+		info: {
+			collectives: [collective, collective],
+			has_synonyms: true,
+			is_moderator_only: false,
+			is_required: false,
+			count: 1464284,
+			name: "php",
+		},
 	},
 };
