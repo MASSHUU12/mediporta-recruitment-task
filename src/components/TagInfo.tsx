@@ -12,6 +12,7 @@ import {
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useEffect, useState } from "react";
 import { TagInfo as Info } from "../types/TagInfo";
+import TagInfoBlock from "./TagInfoBlock";
 
 interface TagInfoProps {
 	info: Info;
@@ -64,30 +65,22 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 				>
 					<Stack spacing={2}>
 						<Divider />
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Count: {info.count}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Required: {info.is_required ? "Yes" : "No"}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Moderator Only: {info.is_moderator_only ? "Yes" : "No"}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Has synonyms: {info.has_synonyms ? "Yes" : "No"}
-						</Typography>
+						<TagInfoBlock
+							prefix="Count"
+							text={info.count}
+						/>
+						<TagInfoBlock
+							prefix="Required"
+							text={info.is_required ? "Yes" : "No"}
+						/>
+						<TagInfoBlock
+							prefix="Moderator Only"
+							text={info.is_moderator_only ? "Yes" : "No"}
+						/>
+						<TagInfoBlock
+							prefix="Has Synonyms"
+							text={info.has_synonyms ? "Yes" : "No"}
+						/>
 						{info.collectives && (
 							<>
 								<Divider />
