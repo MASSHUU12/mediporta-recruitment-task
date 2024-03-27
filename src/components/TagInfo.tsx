@@ -9,6 +9,7 @@ import {
 	Stack,
 	Typography,
 } from "@mui/material";
+import LaunchIcon from "@mui/icons-material/Launch";
 import { useEffect, useState } from "react";
 import { TagInfo as Info } from "../types/TagInfo";
 
@@ -100,6 +101,7 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 											aria-label={`Visit ${collective.name} collective`}
 										>
 											Visit {collective.name} collective
+											<LaunchIcon fontSize="small" />
 										</Link>
 									);
 								})}
