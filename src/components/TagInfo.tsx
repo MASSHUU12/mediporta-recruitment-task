@@ -5,13 +5,13 @@ import {
 	CardContent,
 	Collapse,
 	Divider,
-	Link,
 	Stack,
 	Typography,
 } from "@mui/material";
-import LaunchIcon from "@mui/icons-material/Launch";
 import { useEffect, useState } from "react";
 import { TagInfo as Info } from "../types/TagInfo";
+import TagInfoBlock from "./TagInfoBlock";
+import CollectiveLink from "./CollectiveLink";
 
 interface TagInfoProps {
 	info: Info;
@@ -37,15 +37,13 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 			<CardContent>
 				<CardActions
 					onClick={handleExpandClick}
-					sx={{ cursor: "pointer" }}
+					sx={{ cursor: "pointer", userSelect: "none" }}
 					aria-expanded={isExpanded}
 					aria-label={isExpanded ? "show less" : "show more"}
 				>
 					<Stack
 						direction="row"
-						justifyItems="center"
 						justifyContent="space-between"
-						alignContent="center"
 						sx={{ width: "100%" }}
 					>
 						<Typography
@@ -64,45 +62,32 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 				>
 					<Stack spacing={2}>
 						<Divider />
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Count: {info.count}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Required: {info.is_required ? "Yes" : "No"}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Moderator Only: {info.is_moderator_only ? "Yes" : "No"}
-						</Typography>
-						<Typography
-							variant="body2"
-							color="text.secondary"
-						>
-							Has synonyms: {info.has_synonyms ? "Yes" : "No"}
-						</Typography>
+						<TagInfoBlock
+							prefix="Count"
+							text={info.count}
+						/>
+						<TagInfoBlock
+							prefix="Required"
+							text={info.is_required ? "Yes" : "No"}
+						/>
+						<TagInfoBlock
+							prefix="Moderator Only"
+							text={info.is_moderator_only ? "Yes" : "No"}
+						/>
+						<TagInfoBlock
+							prefix="Has Synonyms"
+							text={info.has_synonyms ? "Yes" : "No"}
+						/>
 						{info.collectives && (
 							<>
 								<Divider />
 								{info.collectives.map(collective => {
 									return (
-										<Link
+										<CollectiveLink
 											key={collective.slug}
-											href={"https://stackoverflow.com" + collective.link}
-											target="_blank"
-											rel="noreferrer"
-											aria-label={`Visit ${collective.name} collective`}
-										>
-											Visit {collective.name} collective
-											<LaunchIcon fontSize="small" />
-										</Link>
+											link={collective.link}
+											name={collective.name}
+										/>
 									);
 								})}
 							</>

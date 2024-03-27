@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import TagInfo from "../../components/TagInfo";
 
 const meta = {
-	title: "Components/TagInfo",
+	title: "Components/TagInfo/TagInfo",
 	component: TagInfo,
 	parameters: {
 		layout: "centered",
