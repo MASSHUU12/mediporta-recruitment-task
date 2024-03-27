@@ -4,23 +4,18 @@ import TagList from "./components/TagList";
 import { useState } from "react";
 import { TagInfoResponse } from "./types/TagInfo";
 import Menu from "./components/Menu";
-import { TagsConfig } from "./types/TagsConfig";
+import { useConfigStore } from "./stores/configStore";
 
 function App() {
+	const config = useConfigStore();
 	const [tags, setTags] = useState<TagInfoResponse | undefined>();
-	const [config, setConfig] = useState<TagsConfig>({
-		page: 1,
-		pageSize: 30,
-		order: "desc",
-		sort: "popular",
-	});
 	const [loading, setLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
 
 	async function loadTags() {
 		setLoading(true);
 
-		await getTags(config)
+		await getTags(config.config)
 			.then(response => {
 				if (!response.successful) {
 					setIsError(true);
