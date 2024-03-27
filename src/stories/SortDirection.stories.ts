@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import SortDirection from "../../components/SortDirection";
+import SortDirection from "../components/SortDirection";
 
 const meta = {
 	title: "Buttons/SortDirection",

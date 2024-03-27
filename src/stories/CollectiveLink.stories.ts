@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CollectiveLink from "../../components/CollectiveLink";
+import CollectiveLink from "../components/CollectiveLink";
 
 const meta = {
 	title: "Components/TagInfo/CollectiveLink",
