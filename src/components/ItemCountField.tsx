@@ -40,6 +40,7 @@ function ItemCountField({ min, max }: ItemCountFieldProps): JSX.Element {
 			label="Number of items"
 			onChange={handleOnChange}
 			value={config.config.pageSize}
+			size="small"
 		/>
 	);
 }

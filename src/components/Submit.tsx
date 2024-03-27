@@ -18,6 +18,7 @@ function Submit({ disabled, onClick }: SubmitProps): JSX.Element {
 		<Button
 			startIcon={<SearchIcon />}
 			variant="contained"
+			size="large"
 			disabled={isDisabled}
 			onClick={onClick}
 		>

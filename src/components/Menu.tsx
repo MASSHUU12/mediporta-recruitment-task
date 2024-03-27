@@ -15,12 +15,14 @@ function Menu(props: MenuProps): JSX.Element {
 	return (
 		<Stack
 			spacing={2}
-			direction="row"
-			alignItems="end"
+			direction={{ xs: "column", sm: "row" }}
+			alignItems={{ xs: "start", sm: "end" }}
+			justifyContent="center"
+			sx={{ width: "90svw" }}
 		>
 			<SortBy />
 			<ItemCountField
-				min={0}
+				min={1}
 				max={100}
 			/>
 			<SortDirection onClick={props.onDirectionChange} />

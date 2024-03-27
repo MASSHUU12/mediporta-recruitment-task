@@ -16,8 +16,8 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 				<Skeleton
 					key={i}
 					variant="rounded"
-					width={360}
-					height={64}
+					width="100%"
+					height="4rem"
 				/>,
 			);
 		}
@@ -26,7 +26,10 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 	}
 
 	return (
-		<Stack spacing={2}>
+		<Stack
+			spacing={2}
+			sx={{ width: "90svw", maxWidth: "48rem" }}
+		>
 			{dataLoading && generateSkeletons(3)}
 			{data !== undefined &&
 				data.items.length !== 0 &&
