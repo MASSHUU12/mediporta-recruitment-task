@@ -3,11 +3,11 @@ import { TagInfoResponse } from "../types/TagInfo";
 import TagInfo from "./TagInfo";
 
 interface TagListProps {
-	dataLoading: boolean;
-	data: TagInfoResponse;
+	isLoading: boolean;
+	data: TagInfoResponse | undefined;
 }
 
-function TagList({ dataLoading, data }: TagListProps): JSX.Element {
+function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 	function generateSkeletons(count: number): JSX.Element[] {
 		const skeletons = [];
 
@@ -27,7 +27,7 @@ function TagList({ dataLoading, data }: TagListProps): JSX.Element {
 
 	return (
 		<Stack spacing={2}>
-			{data.items.length === 0 && !dataLoading && (
+			{(data === undefined || data.items.length === 0) && !dataLoading && (
 				<Typography
 					variant="body2"
 					color="text.secondary"
@@ -36,7 +36,8 @@ function TagList({ dataLoading, data }: TagListProps): JSX.Element {
 				</Typography>
 			)}
 			{dataLoading && generateSkeletons(3)}
-			{data.items.length !== 0 &&
+			{data !== undefined &&
+				data.items.length !== 0 &&
 				!dataLoading &&
 				data.items.map(item => {
 					return (
