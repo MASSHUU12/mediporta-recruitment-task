@@ -16,7 +16,7 @@ function ItemCountField({ min, max }: ItemCountFieldProps): JSX.Element {
 		const parsed = parseInt(event.target.value);
 
 		if (isNaN(parsed) || !isInRange(parsed, min, max)) {
-			setError(`Please enter a number between ${min.toString()} and ${max.toString()}.`);
+			setError(`A number should be between ${min.toString()} and ${max.toString()}.`);
 			config.update({
 				...config.config,
 				pageSize: parsed,
@@ -34,7 +34,6 @@ function ItemCountField({ min, max }: ItemCountFieldProps): JSX.Element {
 	return (
 		<TextField
 			variant="outlined"
-			required
 			type="number"
 			error={error !== ""}
 			helperText={error}
