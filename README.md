@@ -25,3 +25,17 @@ npm start
 [Material UI](https://mui.com/material-ui/getting-started/)
 
 [Material Icons](https://mui.com/material-ui/material-icons/)
+
+[Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
+
+### Env
+
+Usage of `.env` is optional.
+
+If you want to use this file **copy** the `.env.example` file and rename it to `.env`.
+
+#### VITE_USE_API
+
+Defaults to `true` when the variable does not exist.
+
+When set to `false` it uses `stored test data`, at this point any configuration in the menu does **not** work except to change the sort order.
