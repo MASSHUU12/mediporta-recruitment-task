@@ -23,3 +23,5 @@ npm start
 [Usage of /tags](https://api.stackexchange.com/docs/tags)
 
 [Material UI](https://mui.com/material-ui/getting-started/)
+
+[Material Icons](https://mui.com/material-ui/material-icons/)
