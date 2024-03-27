@@ -5,14 +5,13 @@ import {
 	CardContent,
 	Collapse,
 	Divider,
-	Link,
 	Stack,
 	Typography,
 } from "@mui/material";
-import LaunchIcon from "@mui/icons-material/Launch";
 import { useEffect, useState } from "react";
 import { TagInfo as Info } from "../types/TagInfo";
 import TagInfoBlock from "./TagInfoBlock";
+import CollectiveLink from "./CollectiveLink";
 
 interface TagInfoProps {
 	info: Info;
@@ -38,15 +37,13 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 			<CardContent>
 				<CardActions
 					onClick={handleExpandClick}
-					sx={{ cursor: "pointer" }}
+					sx={{ cursor: "pointer", userSelect: "none" }}
 					aria-expanded={isExpanded}
 					aria-label={isExpanded ? "show less" : "show more"}
 				>
 					<Stack
 						direction="row"
-						justifyItems="center"
 						justifyContent="space-between"
-						alignContent="center"
 						sx={{ width: "100%" }}
 					>
 						<Typography
@@ -86,16 +83,11 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 								<Divider />
 								{info.collectives.map(collective => {
 									return (
-										<Link
+										<CollectiveLink
 											key={collective.slug}
-											href={"https://stackoverflow.com" + collective.link}
-											target="_blank"
-											rel="noreferrer"
-											aria-label={`Visit ${collective.name} collective`}
-										>
-											Visit {collective.name} collective
-											<LaunchIcon fontSize="small" />
-										</Link>
+											link={collective.link}
+											name={collective.name}
+										/>
 									);
 								})}
 							</>
