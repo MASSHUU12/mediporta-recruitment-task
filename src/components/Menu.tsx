@@ -18,7 +18,7 @@ function Menu(props: MenuProps): JSX.Element {
 			direction={{ xs: "column", sm: "row" }}
 			alignItems={{ xs: "start", sm: "end" }}
 			justifyContent="center"
-			sx={{ width: "90svw" }}
+			width="100%"
 		>
 			<SortBy />
 			<ItemCountField

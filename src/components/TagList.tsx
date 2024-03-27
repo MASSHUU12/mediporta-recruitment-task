@@ -28,7 +28,8 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 	return (
 		<Stack
 			spacing={2}
-			sx={{ width: "90svw", maxWidth: "48rem" }}
+			width="100%"
+			sx={{ maxWidth: "48rem" }}
 		>
 			{dataLoading && generateSkeletons(3)}
 			{data !== undefined &&

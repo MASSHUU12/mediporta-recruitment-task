@@ -32,7 +32,7 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 	return (
 		<Card
 			variant="outlined"
-			sx={{ width: "90svw", maxWidth: "48rem" }}
+			sx={{ width: "100%", maxWidth: "48rem" }}
 		>
 			<CardContent>
 				<CardActions

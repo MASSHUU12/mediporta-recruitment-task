@@ -1,5 +1,5 @@
 import { getTags } from "./classes/SO";
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import TagList from "./components/TagList";
 import { useState } from "react";
 import { TagInfoResponse } from "./types/TagInfo";
@@ -42,11 +42,17 @@ function App() {
 	}
 
 	return (
-		<main>
+		<Box
+			component="main"
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
+			minHeight="100svh"
+		>
 			<Stack
 				alignItems="center"
 				justifyContent="center"
-				minHeight="100svh"
+				sx={{ width: "90svw" }}
 				spacing={2}
 				marginY={5}
 			>
@@ -79,7 +85,7 @@ function App() {
 					/>
 				)}
 			</Stack>
-		</main>
+		</Box>
 	);
 }
 
