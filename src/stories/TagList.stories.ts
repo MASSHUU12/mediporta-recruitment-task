@@ -17,12 +17,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-		dataLoading: false,
+		isLoading: false,
 	},
 };
 
 export const Loading: Story = {
 	args: {
-		dataLoading: true,
+		isLoading: true,
 	},
 };
