@@ -4,15 +4,15 @@ import { SortOrder } from "../types/Sort";
 import { useEffect, useState } from "react";
 
 interface SortDirectionProps {
-	order: SortOrder;
-	onClick?: () => unknown;
+	order?: SortOrder;
+	onClick?: (direction: SortOrder) => unknown;
 }
 
 function SortDirection(props: SortDirectionProps): JSX.Element {
-	const [displayedOrder, setDisplayedOrder] = useState<SortOrder>(props.order);
+	const [displayedOrder, setDisplayedOrder] = useState<SortOrder>(props.order ?? "desc");
 
 	useEffect(() => {
-		setDisplayedOrder(props.order);
+		setDisplayedOrder(props.order ?? "desc");
 	}, [props.order]);
 
 	return (
@@ -22,7 +22,7 @@ function SortDirection(props: SortDirectionProps): JSX.Element {
 			variant="text"
 			startIcon={<SwapVertIcon />}
 			onClick={() => {
-				if (props.onClick) props.onClick();
+				if (props.onClick) props.onClick(displayedOrder);
 
 				setDisplayedOrder(displayedOrder === "asc" ? "desc" : "asc");
 			}}
