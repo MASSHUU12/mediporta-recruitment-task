@@ -20,7 +20,7 @@ function Menu(props: MenuProps): JSX.Element {
 			<ItemCountField
 				min={0}
 				max={100}
-				defaultValue={1}
+				defaultValue={30}
 			/>
 			<SortDirection onClick={props.onDirectionChange} />
 			<Submit
