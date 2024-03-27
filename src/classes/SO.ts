@@ -17,8 +17,8 @@ export async function getTags(config: TagsConfig): Promise<IOptional<TagInfoResp
 		};
 	}
 
-	const { page, order, sort } = config;
-	const url = `/tags?page=${page.toString()}&order=${order}&sort=${sort}&site=stackoverflow`;
+	const { page, pageSize, order, sort } = config;
+	const url = `/tags?page=${page.toString()}&pagesize=${pageSize.toString()}&order=${order}&sort=${sort}&site=stackoverflow`;
 
 	return await SO.get<TagInfoResponse>(url)
 		.then(value => {
