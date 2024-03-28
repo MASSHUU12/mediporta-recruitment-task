@@ -5,5 +5,5 @@ export interface TagsConfig {
 	pageSize: number;
 	order: SortOrder;
 	sort: SortType;
-	hasMore: boolean;
+	totalPages: number;
 }

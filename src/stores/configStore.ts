@@ -9,10 +9,10 @@ interface ConfigState {
 export const useConfigStore = create<ConfigState>()(set => ({
 	config: {
 		page: 1,
+		totalPages: 1,
 		pageSize: 30,
 		order: "desc",
 		sort: "popular",
-		hasMore: false,
 	},
 	update: config => {
 		set({ config });
