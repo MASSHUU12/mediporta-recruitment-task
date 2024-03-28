@@ -22,6 +22,13 @@ function App() {
 					return;
 				}
 
+				if (response.value?.has_more && config.config.page === config.config.totalPages) {
+					config.update({
+						...config.config,
+						totalPages: config.config.page + 1,
+					});
+				}
+
 				setTags(response.value);
 				setIsError(false);
 			})
