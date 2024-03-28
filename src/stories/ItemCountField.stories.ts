@@ -8,7 +8,7 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
-	args: { min: 1, max: 100, defaultValue: 1 },
+	args: {},
 } satisfies Meta<typeof ItemCountField>;
 
 export default meta;

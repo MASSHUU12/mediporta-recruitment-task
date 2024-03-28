@@ -1,46 +1,24 @@
-import { TextField } from "@mui/material";
-import isInRange from "../helpers/isInRange";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { useConfigStore } from "../stores/configStore";
+import NumericField from "./NumericField";
 
-interface ItemCountFieldProps {
-	min: number;
-	max: number;
-}
-
-function ItemCountField({ min, max }: ItemCountFieldProps): JSX.Element {
+function ItemCountField(): JSX.Element {
 	const config = useConfigStore();
-	const [error, setError] = useState("");
 
 	function handleOnChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-		const parsed = parseInt(event.target.value);
-
-		if (isNaN(parsed) || !isInRange(parsed, min, max)) {
-			setError(`A number should be between ${min.toString()} and ${max.toString()}.`);
-			config.update({
-				...config.config,
-				pageSize: parsed,
-			});
-			return;
-		}
-
 		config.update({
 			...config.config,
-			pageSize: parsed,
+			pageSize: parseInt(event.target.value),
 		});
-		setError("");
 	}
 
 	return (
-		<TextField
-			variant="outlined"
-			type="number"
-			error={error !== ""}
-			helperText={error}
-			label="Number of items"
+		<NumericField
+			min={1}
+			max={100}
+			initialValue={config.config.pageSize}
+			label="Items per page"
 			onChange={handleOnChange}
-			value={config.config.pageSize}
-			size="small"
 		/>
 	);
 }

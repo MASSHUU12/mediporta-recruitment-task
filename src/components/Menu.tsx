@@ -21,10 +21,7 @@ function Menu(props: MenuProps): JSX.Element {
 			width="100%"
 		>
 			<SortBy />
-			<ItemCountField
-				min={1}
-				max={100}
-			/>
+			<ItemCountField />
 			<SortDirection onClick={props.onDirectionChange} />
 			<Submit
 				disabled={props.submitDisabled}
