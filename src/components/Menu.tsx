@@ -4,6 +4,7 @@ import SortDirection from "./SortDirection";
 import Submit from "./Submit";
 import ItemCountField from "./ItemCountField";
 import SortBy from "./SortBy";
+import PageNavigation from "./PageNavigation";
 
 interface MenuProps {
 	submitDisabled: boolean;
@@ -23,6 +24,7 @@ function Menu(props: MenuProps): JSX.Element {
 			<SortBy />
 			<ItemCountField />
 			<SortDirection onClick={props.onDirectionChange} />
+			<PageNavigation />
 			<Submit
 				disabled={props.submitDisabled}
 				onClick={props.onSubmit}
