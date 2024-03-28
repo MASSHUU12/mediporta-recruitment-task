@@ -24,6 +24,7 @@ function SortBy(): JSX.Element {
 				value={config.config.sort}
 				onChange={handleChange}
 				id="sort-by"
+				size="small"
 			>
 				<MenuItem value="popular">Popular</MenuItem>
 				<MenuItem value="activity">Activity</MenuItem>

@@ -1,4 +1,4 @@
-import { Skeleton, Stack, Typography } from "@mui/material";
+import { Skeleton, Stack } from "@mui/material";
 import { TagInfoResponse } from "../types/TagInfo";
 import TagInfo from "./TagInfo";
 
@@ -16,8 +16,8 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 				<Skeleton
 					key={i}
 					variant="rounded"
-					width={360}
-					height={64}
+					width="100%"
+					height="4rem"
 				/>,
 			);
 		}
@@ -26,15 +26,11 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 	}
 
 	return (
-		<Stack spacing={2}>
-			{(data === undefined || data.items.length === 0) && !dataLoading && (
-				<Typography
-					variant="body2"
-					color="text.secondary"
-				>
-					No tags found.
-				</Typography>
-			)}
+		<Stack
+			spacing={2}
+			width="100%"
+			sx={{ maxWidth: "48rem" }}
+		>
 			{dataLoading && generateSkeletons(3)}
 			{data !== undefined &&
 				data.items.length !== 0 &&

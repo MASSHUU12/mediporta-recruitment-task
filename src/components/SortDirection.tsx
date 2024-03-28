@@ -20,6 +20,7 @@ function SortDirection(props: SortDirectionProps): JSX.Element {
 			sx={{ textTransform: "capitalize" }}
 			component="label"
 			variant="text"
+			size="large"
 			startIcon={<SwapVertIcon />}
 			onClick={() => {
 				if (props.onClick) props.onClick(displayedOrder);
