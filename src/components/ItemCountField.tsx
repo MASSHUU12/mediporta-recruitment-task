@@ -8,6 +8,8 @@ function ItemCountField(): JSX.Element {
 	function handleOnChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
 		config.update({
 			...config.config,
+			page: 1,
+			totalPages: 1,
 			pageSize: parseInt(event.target.value),
 		});
 	}

@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
 import PageNavigation from "../components/PageNavigation";
-import { fn } from "@storybook/test";
 import { useConfigStore } from "../stores/configStore";
 
 const meta = {
@@ -10,43 +9,42 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
-	args: { onPrevious: fn(), onNext: fn() },
+	args: {},
 	decorators: [
 		Story => (
 			<div>
 				<div>
-					<button
-						onClick={() => {
-							const config = useConfigStore.getState();
-							useConfigStore
-								.getState()
-								.update({ ...config.config, page: config.config.page - 1 });
-						}}
-					>
-						-
-					</button>
-					<button
-						onClick={() => {
+					{/*
+						It works funky, but yeah.
+						Just remount the component when you make changes
+					*/}
+					<input
+						type="number"
+						placeholder="Page"
+						value={useConfigStore.getState().config.page}
+						onChange={event => {
 							const config = useConfigStore.getState();
 							useConfigStore.getState().update({
 								...config.config,
-								page: config.config.page + 1,
+								page: Number(event.target.value),
 							});
+
+							event.target.value = useConfigStore.getState().config
+								.page as unknown as string;
 						}}
-					>
-						+
-					</button>
-					<button
-						onClick={() => {
+					/>
+					<input
+						type="number"
+						placeholder="Total pages"
+						value={useConfigStore.getState().config.totalPages}
+						onChange={event => {
 							const config = useConfigStore.getState();
 							useConfigStore.getState().update({
 								...config.config,
-								hasMore: !config.config.hasMore,
+								totalPages: Number(event.target.value),
 							});
 						}}
-					>
-						Has more?
-					</button>
+					/>
 				</div>
 				<Story />
 			</div>
