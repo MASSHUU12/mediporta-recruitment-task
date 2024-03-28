@@ -12,6 +12,7 @@ export const useConfigStore = create<ConfigState>()(set => ({
 		pageSize: 30,
 		order: "desc",
 		sort: "popular",
+		hasMore: false,
 	},
 	update: config => {
 		set({ config });
