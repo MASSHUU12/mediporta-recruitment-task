@@ -8,6 +8,8 @@ function SortBy(): JSX.Element {
 	function handleChange(event: SelectChangeEvent) {
 		config.update({
 			...config.config,
+			page: 1,
+			totalPages: 1,
 			sort: event.target.value as SortType,
 		});
 	}
