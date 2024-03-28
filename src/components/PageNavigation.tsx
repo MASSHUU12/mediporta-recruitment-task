@@ -3,22 +3,15 @@ import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRound
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { useConfigStore } from "../stores/configStore";
 
-interface PageNavigationProps {
-	onPrevious: () => void;
-	onNext: () => void;
-}
-
-function PageNavigation({ onPrevious, onNext }: PageNavigationProps): JSX.Element {
+function PageNavigation(): JSX.Element {
 	const config = useConfigStore();
 
 	function handlePrevious() {
 		config.update({ ...config.config, page: config.config.page - 1 });
-		onPrevious();
 	}
 
 	function handleNext() {
 		config.update({ ...config.config, page: config.config.page + 1 });
-		onNext();
 	}
 
 	return (
@@ -41,7 +34,7 @@ function PageNavigation({ onPrevious, onNext }: PageNavigationProps): JSX.Elemen
 				{config.config.page}
 			</Typography>
 			<IconButton
-				disabled={!config.config.hasMore}
+				disabled={config.config.page >= config.config.totalPages}
 				aria-label="next page"
 				onClick={handleNext}
 			>
