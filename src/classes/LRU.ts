@@ -33,4 +33,9 @@ export default class LRU<T> {
 		const keyToRemove = this.order.shift();
 		if (keyToRemove !== undefined) this.items.delete(keyToRemove);
 	}
+
+	clear(): void {
+		this.items.clear();
+		this.order.length = 0;
+	}
 }
