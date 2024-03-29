@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import LRU from "../classes/LRU";
-import { TagInfo } from "../types/TagInfo";
+import { TagInfoResponse } from "../types/TagInfo";
 
 interface CacheState {
-	pages: LRU<TagInfo[]>;
+	pagesInfo: LRU<TagInfoResponse>;
 	update: (state: CacheState) => void;
 }
 
 export const useCacheStore = create<CacheState>()(set => ({
-	pages: new LRU<TagInfo[]>(10),
+	pagesInfo: new LRU<TagInfoResponse>(10),
 	update: state => {
 		set({ ...state });
 	},

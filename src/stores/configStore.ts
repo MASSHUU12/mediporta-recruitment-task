@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { TagsConfig } from "../types/TagsConfig";
-import { TagInfo } from "../types/TagInfo";
+import { TagInfoResponse } from "../types/TagInfo";
 
 interface ConfigState {
 	config: TagsConfig;
-	currentTags: TagInfo[];
+	currentPageInfo: TagInfoResponse | undefined;
 	update: (config: ConfigState) => void;
 }
 
@@ -16,7 +16,7 @@ export const useConfigStore = create<ConfigState>()(set => ({
 		order: "desc",
 		sort: "popular",
 	},
-	currentTags: [],
+	currentPageInfo: undefined,
 	update: state => {
 		set(state);
 	},
