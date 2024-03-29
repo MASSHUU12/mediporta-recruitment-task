@@ -15,37 +15,39 @@ function App() {
 	async function loadTags() {
 		setLoading(true);
 
-		await getTags(state.config)
-			.then(response => {
-				let newState = state;
+		if (cache.pagesInfo.get(state.config.page.toString()) === undefined)
+			await getTags(state.config)
+				.then(response => {
+					let newState = state;
 
-				if (!response.successful) {
+					if (!response.successful) {
+						setIsError(true);
+						return;
+					}
+
+					if (response.value?.has_more && state.config.page === state.config.totalPages) {
+						newState = {
+							...state,
+							config: {
+								...state.config,
+								totalPages: state.config.page + 1,
+							},
+						};
+					}
+
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					const value = response.value!;
+					cache.pagesInfo.set(newState.config.page.toString(), value);
+					state.update({
+						...newState,
+						currentPageInfo: response.value ?? undefined,
+					});
+
+					setIsError(false);
+				})
+				.catch(() => {
 					setIsError(true);
-					return;
-				}
-
-				if (response.value?.has_more && state.config.page === state.config.totalPages) {
-					newState = {
-						...state,
-						config: {
-							...state.config,
-							totalPages: state.config.page + 1,
-						},
-					};
-				}
-
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				cache.pagesInfo.set(newState.config.page.toString(), response.value!);
-				state.update({
-					...newState,
-					currentPageInfo: response.value ?? undefined,
 				});
-
-				setIsError(false);
-			})
-			.catch(() => {
-				setIsError(true);
-			});
 
 		setLoading(false);
 	}
@@ -81,7 +83,6 @@ function App() {
 					submitDisabled={loading}
 					onDirectionChange={changeOrder}
 					onSubmit={() => {
-						cache.pagesInfo.clear();
 						void loadTags();
 					}}
 				/>
