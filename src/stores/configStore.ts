@@ -5,7 +5,8 @@ import { TagInfoResponse } from "../types/TagInfo";
 interface ConfigState {
 	config: TagsConfig;
 	currentPageInfo: TagInfoResponse | undefined;
-	update: (config: ConfigState) => void;
+	update: (state: ConfigState) => void;
+	resetPages: (state: ConfigState) => void;
 }
 
 export const useConfigStore = create<ConfigState>()(set => ({
@@ -18,6 +19,17 @@ export const useConfigStore = create<ConfigState>()(set => ({
 	},
 	currentPageInfo: undefined,
 	update: state => {
-		set(state);
+		set(() => state);
+	},
+	resetPages: state => {
+		set({
+			...state,
+			config: {
+				...state.config,
+				page: 1,
+				totalPages: 1,
+			},
+			currentPageInfo: undefined,
+		});
 	},
 }));
