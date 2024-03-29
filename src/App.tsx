@@ -5,9 +5,11 @@ import { useState } from "react";
 import { TagInfoResponse } from "./types/TagInfo";
 import Menu from "./components/Menu";
 import { useConfigStore } from "./stores/configStore";
+import { useCacheStore } from "./stores/cacheStore";
 
 function App() {
-	const config = useConfigStore();
+	const state = useConfigStore();
+	const cache = useCacheStore();
 	const [tags, setTags] = useState<TagInfoResponse | undefined>();
 	const [loading, setLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
@@ -15,19 +17,27 @@ function App() {
 	async function loadTags() {
 		setLoading(true);
 
-		await getTags(config.config)
+		cache.pages.clear();
+
+		await getTags(state.config)
 			.then(response => {
 				if (!response.successful) {
 					setIsError(true);
 					return;
 				}
 
-				if (response.value?.has_more && config.config.page === config.config.totalPages) {
-					config.update({
-						...config.config,
-						totalPages: config.config.page + 1,
+				if (response.value?.has_more && state.config.page === state.config.totalPages) {
+					state.update({
+						...state,
+						config: {
+							...state.config,
+							totalPages: state.config.page + 1,
+						},
 					});
 				}
+
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				cache.pages.set(state.config.page.toString(), response.value!.items);
 
 				setTags(response.value);
 				setIsError(false);

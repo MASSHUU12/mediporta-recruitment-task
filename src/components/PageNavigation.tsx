@@ -4,14 +4,26 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import { useConfigStore } from "../stores/configStore";
 
 function PageNavigation(): JSX.Element {
-	const config = useConfigStore();
+	const state = useConfigStore();
 
 	function handlePrevious() {
-		config.update({ ...config.config, page: config.config.page - 1 });
+		state.update({
+			...state,
+			config: {
+				...state.config,
+				page: state.config.page - 1,
+			},
+		});
 	}
 
 	function handleNext() {
-		config.update({ ...config.config, page: config.config.page + 1 });
+		state.update({
+			...state,
+			config: {
+				...state.config,
+				page: state.config.page + 1,
+			},
+		});
 	}
 
 	return (
@@ -20,7 +32,7 @@ function PageNavigation(): JSX.Element {
 			alignItems="center"
 		>
 			<IconButton
-				disabled={config.config.page <= 1}
+				disabled={state.config.page <= 1}
 				aria-label="previous page"
 				onClick={handlePrevious}
 			>
@@ -31,10 +43,10 @@ function PageNavigation(): JSX.Element {
 				color="text.secondary"
 				sx={{ userSelect: "none" }}
 			>
-				{config.config.page}
+				{state.config.page}
 			</Typography>
 			<IconButton
-				disabled={config.config.page >= config.config.totalPages}
+				disabled={state.config.page >= state.config.totalPages}
 				aria-label="next page"
 				onClick={handleNext}
 			>
