@@ -51,10 +51,10 @@ function PageNavigation(): JSX.Element {
 				color="text.secondary"
 				sx={{ userSelect: "none" }}
 			>
-				{state.config.page}
+				{state.config.page}/{state.config.totalPages}
 			</Typography>
 			<IconButton
-				disabled={state.config.page > state.config.totalPages}
+				disabled={state.config.page >= state.config.totalPages}
 				aria-label="next page"
 				onClick={handleNext}
 			>
