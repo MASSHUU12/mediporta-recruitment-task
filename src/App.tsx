@@ -2,7 +2,6 @@ import { getTags } from "./classes/SO";
 import { Box, Stack, Typography } from "@mui/material";
 import TagList from "./components/TagList";
 import { useState } from "react";
-import { TagInfoResponse } from "./types/TagInfo";
 import Menu from "./components/Menu";
 import { useConfigStore } from "./stores/configStore";
 import { useCacheStore } from "./stores/cacheStore";
@@ -10,36 +9,38 @@ import { useCacheStore } from "./stores/cacheStore";
 function App() {
 	const state = useConfigStore();
 	const cache = useCacheStore();
-	const [tags, setTags] = useState<TagInfoResponse | undefined>();
 	const [loading, setLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
 
 	async function loadTags() {
 		setLoading(true);
 
-		cache.pages.clear();
-
 		await getTags(state.config)
 			.then(response => {
+				let newState = state;
+
 				if (!response.successful) {
 					setIsError(true);
 					return;
 				}
 
 				if (response.value?.has_more && state.config.page === state.config.totalPages) {
-					state.update({
+					newState = {
 						...state,
 						config: {
 							...state.config,
 							totalPages: state.config.page + 1,
 						},
-					});
+					};
 				}
 
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				cache.pages.set(state.config.page.toString(), response.value!.items);
+				cache.pagesInfo.set(newState.config.page.toString(), response.value!);
+				state.update({
+					...newState,
+					currentPageInfo: response.value ?? undefined,
+				});
 
-				setTags(response.value);
 				setIsError(false);
 			})
 			.catch(() => {
@@ -50,11 +51,14 @@ function App() {
 	}
 
 	function changeOrder() {
-		if (tags === undefined) return;
+		if (state.currentPageInfo === undefined) return;
 
-		setTags({
-			...tags,
-			items: tags.items.reverse(),
+		state.update({
+			...state,
+			currentPageInfo: {
+				...state.currentPageInfo,
+				items: state.currentPageInfo.items.reverse(),
+			},
 		});
 	}
 
@@ -76,9 +80,12 @@ function App() {
 				<Menu
 					submitDisabled={loading}
 					onDirectionChange={changeOrder}
-					onSubmit={() => void loadTags()}
+					onSubmit={() => {
+						cache.pagesInfo.clear();
+						void loadTags();
+					}}
 				/>
-				{tags === undefined && !loading && !isError && (
+				{state.currentPageInfo === undefined && !loading && !isError && (
 					<Typography
 						variant="body2"
 						color="text.secondary"
@@ -95,10 +102,10 @@ function App() {
 						connection and try again.
 					</Typography>
 				)}
-				{(loading || tags !== undefined) && (
+				{(loading || state.currentPageInfo !== undefined) && (
 					<TagList
 						isLoading={loading}
-						data={tags}
+						data={state.currentPageInfo}
 					/>
 				)}
 			</Stack>
