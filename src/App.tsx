@@ -94,7 +94,7 @@ function App() {
 						Here the tags will appear when they are downloaded.
 					</Typography>
 				)}
-				{isError && (
+				{state.currentPageInfo === undefined && isError && (
 					<Typography
 						variant="body2"
 						color="text.error"
