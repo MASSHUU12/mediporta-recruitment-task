@@ -1,24 +1,28 @@
 import { ChangeEvent } from "react";
 import { useConfigStore } from "../stores/configStore";
 import NumericField from "./NumericField";
+import { useCacheStore } from "../stores/cacheStore";
 
 function ItemCountField(): JSX.Element {
-	const config = useConfigStore();
+	const state = useConfigStore();
+	const cache = useCacheStore();
 
 	function handleOnChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-		config.update({
-			...config.config,
-			page: 1,
-			totalPages: 1,
-			pageSize: parseInt(event.target.value),
+		state.resetPages({
+			...state,
+			config: {
+				...state.config,
+				pageSize: parseInt(event.target.value),
+			},
 		});
+		cache.pagesInfo.clear();
 	}
 
 	return (
 		<NumericField
 			min={1}
 			max={100}
-			initialValue={config.config.pageSize}
+			initialValue={state.config.pageSize}
 			label="Items per page"
 			onChange={handleOnChange}
 		/>

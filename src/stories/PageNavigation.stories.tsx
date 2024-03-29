@@ -23,10 +23,13 @@ const meta = {
 						placeholder="Page"
 						value={useConfigStore.getState().config.page}
 						onChange={event => {
-							const config = useConfigStore.getState();
+							const state = useConfigStore.getState();
 							useConfigStore.getState().update({
-								...config.config,
-								page: Number(event.target.value),
+								...state,
+								config: {
+									...state.config,
+									page: Number(event.target.value),
+								},
 							});
 
 							event.target.value = useConfigStore.getState().config
@@ -38,10 +41,13 @@ const meta = {
 						placeholder="Total pages"
 						value={useConfigStore.getState().config.totalPages}
 						onChange={event => {
-							const config = useConfigStore.getState();
+							const state = useConfigStore.getState();
 							useConfigStore.getState().update({
-								...config.config,
-								totalPages: Number(event.target.value),
+								...state,
+								config: {
+									...state.config,
+									totalPages: Number(event.target.value),
+								},
 							});
 						}}
 					/>

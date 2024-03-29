@@ -1,9 +1,12 @@
 import { create } from "zustand";
 import { TagsConfig } from "../types/TagsConfig";
+import { TagInfoResponse } from "../types/TagInfo";
 
 interface ConfigState {
 	config: TagsConfig;
-	update: (config: TagsConfig) => void;
+	currentPageInfo: TagInfoResponse | undefined;
+	update: (state: ConfigState) => void;
+	resetPages: (state: ConfigState) => void;
 }
 
 export const useConfigStore = create<ConfigState>()(set => ({
@@ -14,7 +17,19 @@ export const useConfigStore = create<ConfigState>()(set => ({
 		order: "desc",
 		sort: "popular",
 	},
-	update: config => {
-		set({ config });
+	currentPageInfo: undefined,
+	update: state => {
+		set(() => state);
+	},
+	resetPages: state => {
+		set({
+			...state,
+			config: {
+				...state.config,
+				page: 1,
+				totalPages: 1,
+			},
+			currentPageInfo: undefined,
+		});
 	},
 }));

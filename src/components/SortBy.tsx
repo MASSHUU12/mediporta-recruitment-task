@@ -1,17 +1,21 @@
 import { InputLabel, MenuItem, Select, SelectChangeEvent, Stack } from "@mui/material";
 import { useConfigStore } from "../stores/configStore";
 import { SortType } from "../types/Sort";
+import { useCacheStore } from "../stores/cacheStore";
 
 function SortBy(): JSX.Element {
-	const config = useConfigStore();
+	const state = useConfigStore();
+	const cache = useCacheStore();
 
 	function handleChange(event: SelectChangeEvent) {
-		config.update({
-			...config.config,
-			page: 1,
-			totalPages: 1,
-			sort: event.target.value as SortType,
+		state.resetPages({
+			...state,
+			config: {
+				...state.config,
+				sort: event.target.value as SortType,
+			},
 		});
+		cache.pagesInfo.clear();
 	}
 
 	return (
@@ -23,7 +27,7 @@ function SortBy(): JSX.Element {
 				Sort by
 			</InputLabel>
 			<Select
-				value={config.config.sort}
+				value={state.config.sort}
 				onChange={handleChange}
 				id="sort-by"
 				size="small"

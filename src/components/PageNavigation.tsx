@@ -2,16 +2,36 @@ import { IconButton, Stack, Typography } from "@mui/material";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { useConfigStore } from "../stores/configStore";
+import { useCacheStore } from "../stores/cacheStore";
 
 function PageNavigation(): JSX.Element {
-	const config = useConfigStore();
+	const state = useConfigStore();
+	const cache = useCacheStore();
 
 	function handlePrevious() {
-		config.update({ ...config.config, page: config.config.page - 1 });
+		const previousPage = cache.pagesInfo.get((state.config.page - 1).toString());
+
+		state.update({
+			...state,
+			config: {
+				...state.config,
+				page: state.config.page - 1,
+			},
+			currentPageInfo: previousPage ?? undefined,
+		});
 	}
 
 	function handleNext() {
-		config.update({ ...config.config, page: config.config.page + 1 });
+		const nextPage = cache.pagesInfo.get((state.config.page + 1).toString());
+
+		state.update({
+			...state,
+			config: {
+				...state.config,
+				page: state.config.page + 1,
+			},
+			currentPageInfo: nextPage ?? undefined,
+		});
 	}
 
 	return (
@@ -20,7 +40,7 @@ function PageNavigation(): JSX.Element {
 			alignItems="center"
 		>
 			<IconButton
-				disabled={config.config.page <= 1}
+				disabled={state.config.page <= 1}
 				aria-label="previous page"
 				onClick={handlePrevious}
 			>
@@ -31,10 +51,10 @@ function PageNavigation(): JSX.Element {
 				color="text.secondary"
 				sx={{ userSelect: "none" }}
 			>
-				{config.config.page}
+				{state.config.page}/{state.config.totalPages}
 			</Typography>
 			<IconButton
-				disabled={config.config.page >= config.config.totalPages}
+				disabled={state.config.page >= state.config.totalPages}
 				aria-label="next page"
 				onClick={handleNext}
 			>
