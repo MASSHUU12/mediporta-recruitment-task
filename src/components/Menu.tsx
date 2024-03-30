@@ -24,11 +24,17 @@ function Menu(props: MenuProps): JSX.Element {
 			<SortBy />
 			<ItemCountField />
 			<SortDirection onClick={props.onDirectionChange} />
-			<PageNavigation />
-			<Submit
-				disabled={props.submitDisabled}
-				onClick={props.onSubmit}
-			/>
+			<Stack
+				direction="row"
+				display="flex"
+				flexWrap="wrap"
+			>
+				<PageNavigation />
+				<Submit
+					disabled={props.submitDisabled}
+					onClick={props.onSubmit}
+				/>
+			</Stack>
 		</Stack>
 	);
 }

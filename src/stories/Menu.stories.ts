@@ -3,7 +3,7 @@ import Menu from "../components/Menu";
 import { fn } from "@storybook/test";
 
 const meta = {
-	title: "Components/Menu",
+	title: "Components/Menu/Menu",
 	component: Menu,
 	parameters: {
 		layout: "centered",

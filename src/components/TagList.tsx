@@ -7,7 +7,7 @@ interface TagListProps {
 	data: TagInfoResponse | undefined;
 }
 
-function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
+function TagList({ isLoading, data }: TagListProps): JSX.Element {
 	function generateSkeletons(count: number): JSX.Element[] {
 		const skeletons = [];
 
@@ -31,10 +31,9 @@ function TagList({ isLoading: dataLoading, data }: TagListProps): JSX.Element {
 			width="100%"
 			sx={{ maxWidth: "48rem" }}
 		>
-			{dataLoading && generateSkeletons(3)}
+			{isLoading && generateSkeletons(3)}
 			{data !== undefined &&
-				data.items.length !== 0 &&
-				!dataLoading &&
+				!isLoading &&
 				data.items.map(item => {
 					return (
 						<TagInfo
