@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import ItemCountField from "../components/ItemCountField";
 
 const meta = {
-	title: "Components/ItemCountField",
+	title: "Components/Menu/ItemCountField",
 	component: ItemCountField,
 	parameters: {
 		layout: "centered",

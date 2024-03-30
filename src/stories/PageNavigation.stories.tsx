@@ -3,7 +3,7 @@ import PageNavigation from "../components/PageNavigation";
 import { useConfigStore } from "../stores/configStore";
 
 const meta = {
-	title: "Components/PageNavigation",
+	title: "Components/Menu/PageNavigation",
 	component: PageNavigation,
 	parameters: {
 		layout: "centered",

@@ -3,7 +3,7 @@ import { fn } from "@storybook/test";
 import Submit from "../components/Submit";
 
 const meta = {
-	title: "Components/Submit",
+	title: "Components/Menu/Submit",
 	component: Submit,
 	parameters: {
 		layout: "centered",

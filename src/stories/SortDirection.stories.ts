@@ -3,7 +3,7 @@ import { fn } from "@storybook/test";
 import SortDirection from "../components/SortDirection";
 
 const meta = {
-	title: "Buttons/SortDirection",
+	title: "Components/Menu/SortDirection",
 	component: SortDirection,
 	parameters: {
 		layout: "centered",
