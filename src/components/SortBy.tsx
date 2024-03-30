@@ -21,8 +21,9 @@ function SortBy(): JSX.Element {
 	return (
 		<Stack>
 			<InputLabel
-				variant="standard"
+				variant="filled"
 				htmlFor="sort-by"
+				shrink
 			>
 				Sort by
 			</InputLabel>
