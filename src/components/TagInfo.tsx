@@ -47,7 +47,7 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 						sx={{ width: "100%" }}
 					>
 						<Typography
-							variant="h5"
+							variant="body1"
 							component="h3"
 						>
 							{info.name}
@@ -60,7 +60,7 @@ function TagInfo({ info, expanded }: TagInfoProps): JSX.Element {
 					timeout="auto"
 					unmountOnExit
 				>
-					<Stack spacing={2}>
+					<Stack spacing={1}>
 						<Divider />
 						<TagInfoBlock
 							prefix="Count"
